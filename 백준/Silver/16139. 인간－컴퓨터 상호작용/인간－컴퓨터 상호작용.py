@@ -2,20 +2,20 @@ import sys
 
 s = input()
 n = int(input())
-char_arr = []
-left_arr = []
-right_arr = []
+
+pre_sum = {chr(c) : [0] * (len(s) + 1) for c in range(97, 123)}
+
+for i, char in enumerate(s):
+    for c in pre_sum:
+        pre_sum[c][i + 1] = pre_sum[c][i] + (1 if c == char else 0)
+
+res = []
+
 for _ in range(n):
-    char, left, right = sys.stdin.readline().rstrip().split()
-    left = int(left)
-    right = int(right)
-    char_arr.append(char)
-    left_arr.append(left)
-    right_arr.append(right)
+    char, left, right = sys.stdin.readline().split()
+    left, right = int(left), int(right)
     
-for i in range(n):
-    ans = 0
-    for j in range(left_arr[i], right_arr[i] + 1):
-        if s[j] == char_arr[i]:
-            ans += 1
-    print(ans)
+    ans = pre_sum[char][right + 1] - pre_sum[char][left]
+    res.append(str(ans))
+    
+sys.stdout.write('\n'.join(res) + '\n')
