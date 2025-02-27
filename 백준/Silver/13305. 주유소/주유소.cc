@@ -13,7 +13,7 @@ int main()
     int cost_arr[100000];
     int n;
     int min_cost = 1000000001;
-    int min_cost_idx;
+    int min_cost_idx = -1;
     int current_cost;
     int dist_left;
 
@@ -36,23 +36,30 @@ int main()
         }
     }
 
-    dist_left = total_dist - dist_arr[0];
-    total_cost = cost_arr[0] * dist_arr[0];
-    current_cost = cost_arr[0];
-
-    for (int i = 1; i < n; i++)
+    if (min_cost_idx == 0)
     {
-        if (i == min_cost_idx)
+        total_cost = (long long)total_dist * min_cost;
+    }
+    else
+    {
+        dist_left = total_dist - dist_arr[0];
+        total_cost = (long long)cost_arr[0] * dist_arr[0];
+        current_cost = cost_arr[0];
+
+        for (int i = 1; i < n; i++)
         {
-            total_cost += dist_left * min_cost;
-            break;
+            if (i == min_cost_idx)
+            {
+                total_cost += (long long)dist_left * min_cost;
+                break;
+            }
+            if (current_cost > cost_arr[i])
+            {
+                current_cost = cost_arr[i];
+            }
+            dist_left -= dist_arr[i];
+            total_cost += (long long)current_cost * dist_arr[i];
         }
-        if (current_cost > cost_arr[i])
-        {
-            current_cost = cost_arr[i];
-        }
-        dist_left -= dist_arr[i];
-        total_cost += current_cost * dist_arr[i];
     }
 
     cout << total_cost;
