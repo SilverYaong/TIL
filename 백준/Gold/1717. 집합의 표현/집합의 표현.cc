@@ -8,7 +8,7 @@ vector<int> arr;
 
 int unifind(int x) {
 	if (arr[x] != x) {
-		return x = unifind(arr[x]);
+		return arr[x] = unifind(arr[x]);
 	}
 	return x;
 }
