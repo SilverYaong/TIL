@@ -12,9 +12,8 @@ struct Group {
 	Group() : rep(-1), size(1) {}
 };
 
-Group arr[200001];
-unordered_map<string, int> id;
-int num;
+const int MAX = 200001;
+Group arr[MAX];
 
 int unifind(int x) {
 	if (arr[x].rep != -1) {
@@ -39,13 +38,15 @@ void uni(int x, int y) {
 int main()
 {
 	//freopen("input.txt", "r", stdin);
-	int TC, F;
+	int TC;
 	scanf("%d", &TC);
-	for (int t = 0; t < TC; t++) {
-		id.clear();
-		num = 1;
+	for (register int t = 0; t < TC; t++) {
+		unordered_map<string, int> id;
+		id.reserve(MAX);
+		int num = 1;
+		int F;
 		scanf("%d", &F);
-		for (int i = 0; i < F; i++) {
+		for (register int i = 0; i < F; i++) {
 			char a[21], b[21];
 			scanf("%s %s", a, b);
 			if (id.find(a) == id.end()) {
@@ -59,8 +60,7 @@ int main()
 				id[b] = num++;
 			}
 			uni(id[a], id[b]);
-			int root = unifind(id[a]);
-			printf("%d\n", arr[root].size);
+			printf("%d\n", arr[unifind(id[a])].size);
 		}
 	}
 }
