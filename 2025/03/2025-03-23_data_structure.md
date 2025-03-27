@@ -9,7 +9,7 @@
 int size = 1;
 int node = 8;
 while (size < node) {
-    size << 1;
+    size <<= 1;
 }
 // 1, 2, 4, 8
 ```
