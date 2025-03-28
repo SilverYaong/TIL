@@ -23,6 +23,8 @@ vector<double> minDist(N, INF);
 vector<double> posX(N), posY(N);
 
 // 정점 순회
+// 0번 정점부터 시작
+minDis[0] = 0;
 for (int i = 0; i < N; i++) {
     int target = -1;
     double minCost = INF;
@@ -42,8 +44,8 @@ for (int i = 0; i < N; i++) {
     for (int v = 0; v < N; v++) {
         if (!visited[v]) {
             // 피타고라스의 정리 : a^2 + b^2 = c^2
-            double dx = posX[u] - posX[v];
-            double dy = posY[u] - posY[v];
+            double dx = posX[target] - posX[v];
+            double dy = posY[target] - posY[v];
             double cost = sqrt(dx * dx + dy * dy);
             // 기존보다 더 짧은 거리면 업데이트
             if (cost < minDist[v]) {
