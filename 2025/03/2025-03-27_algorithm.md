@@ -24,7 +24,7 @@ vector<double> posX(N), posY(N);
 
 // 정점 순회
 // 0번 정점부터 시작
-minDis[0] = 0;
+minDist[0] = 0;
 for (int i = 0; i < N; i++) {
     int target = -1;
     double minCost = INF;
